@@ -19,6 +19,8 @@
 #import "SUAppcastItem.h"
 #import "SUApplicationInfo.h"
 
+#import "DevolutionsHelper.h"
+
 #if __MAC_OS_X_VERSION_MAX_ALLOWED < 1080
 @interface NSByteCountFormatter : NSFormatter {
 @private
@@ -87,14 +89,21 @@
     }
 
     // Only show the update alert if the app is active; otherwise, we'll wait until it is.
-    if ([NSApp isActive]) {
+    if ([NSApp isActive])
+    {
         NSWindow *window = [self.updateAlert window];
         if ([self shouldDisableKeyboardShortcutForInstallButton]) {
             [self.updateAlert disableKeyboardShortcutForInstallButton];
         }
-        [window makeKeyAndOrderFront:self];
-    } else
+        
+        [DevolutionsHelper runTaskAfterModalSessionEndWithBlock:^{
+            [window makeKeyAndOrderFront:self];
+        }];
+    }
+    else
+    {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    }
 }
 
 - (BOOL)shouldDisableKeyboardShortcutForInstallButton {
@@ -121,8 +130,10 @@
 
 - (void)applicationDidBecomeActive:(NSNotification *)__unused aNotification
 {
-    [[self.updateAlert window] makeKeyAndOrderFront:self];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    [DevolutionsHelper runTaskAfterModalSessionEndWithBlock:^{
+        [[self.updateAlert window] makeKeyAndOrderFront:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    }];
 }
 
 - (void)updateAlertFinishedWithChoice:(SUUpdateAlertChoice)choice
@@ -262,8 +273,10 @@
     [self.statusController setProgressValue:1.0]; // Fill the bar.
     [self.statusController setButtonEnabled:YES];
     [self.statusController setButtonTitle:SULocalizedString(@"Install and Relaunch", nil) target:self action:@selector(installAndRestart:) isDefault:YES];
-    [[self.statusController window] makeKeyAndOrderFront:self];
-    [NSApp requestUserAttention:NSInformationalRequest];
+    [DevolutionsHelper runTaskAfterModalSessionEndWithBlock:^{
+        [[self.statusController window] makeKeyAndOrderFront:self];
+        [NSApp requestUserAttention:NSInformationalRequest];
+    }];
 }
 
 - (void)installAndRestart:(id)__unused sender

@@ -17,6 +17,8 @@
 #import "SUAppcastItem.h"
 #import "SUApplicationInfo.h"
 
+#import "DevolutionsHelper.h"
+
 // If the user hasn't quit in a week, ask them if they want to relaunch to get the latest bits. It doesn't matter that this measure of "one day" is imprecise.
 static const NSTimeInterval SUAutomaticUpdatePromptImpatienceTimer = 60 * 60 * 24 * 7;
 
@@ -66,9 +68,15 @@ static const NSTimeInterval SUAutomaticUpdatePromptImpatienceTimer = 60 * 60 * 2
     }
 
     if ([NSApp isActive])
-        [[self.alert window] makeKeyAndOrderFront:self];
+    {
+        [DevolutionsHelper runTaskAfterModalSessionEndWithBlock:^{
+            [[self.alert window] makeKeyAndOrderFront:self];
+        }];
+    }
     else
+    {
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(applicationDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    }
 }
 
 - (void)unarchiverDidFinish:(id)__unused ua
@@ -166,8 +174,10 @@ static const NSTimeInterval SUAutomaticUpdatePromptImpatienceTimer = 60 * 60 * 2
 
 - (void)applicationDidBecomeActive:(NSNotification *)__unused aNotification
 {
-    [[self.alert window] makeKeyAndOrderFront:self];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    [DevolutionsHelper runTaskAfterModalSessionEndWithBlock:^{
+        [[self.alert window] makeKeyAndOrderFront:self];
+        [[NSNotificationCenter defaultCenter] removeObserver:self name:NSApplicationDidBecomeActiveNotification object:NSApp];
+    }];
 }
 
 - (void)automaticUpdateAlertFinishedWithChoice:(SUAutomaticInstallationChoice)choice

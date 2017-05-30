@@ -188,6 +188,8 @@
 		61F83F720DBFE140006FDD30 /* SUBasicUpdateDriver.m in Sources */ = {isa = PBXBuildFile; fileRef = 61F83F700DBFE137006FDD30 /* SUBasicUpdateDriver.m */; };
 		61F83F740DBFE141006FDD30 /* SUBasicUpdateDriver.h in Headers */ = {isa = PBXBuildFile; fileRef = 61F83F6F0DBFE137006FDD30 /* SUBasicUpdateDriver.h */; settings = {ATTRIBUTES = (); }; };
 		61FA52880E2D9EA400EF58AD /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8DC2EF5B0486A6940098B216 /* Sparkle.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		651690AB1EDDBDA10069AF40 /* DevolutionsHelper.h in Headers */ = {isa = PBXBuildFile; fileRef = 651690A91EDDBDA10069AF40 /* DevolutionsHelper.h */; };
+		651690AC1EDDBDA10069AF40 /* DevolutionsHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 651690AA1EDDBDA10069AF40 /* DevolutionsHelper.m */; };
 		7205C4311E1215AD00E370AE /* SUUpdatePermissionResponse.h in Headers */ = {isa = PBXBuildFile; fileRef = 7205C42F1E1215AD00E370AE /* SUUpdatePermissionResponse.h */; };
 		7205C4321E1215AD00E370AE /* SUUpdatePermissionResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7205C4301E1215AD00E370AE /* SUUpdatePermissionResponse.m */; };
 		720767CF1E2DC37400F9A850 /* TerminationListener.m in Sources */ = {isa = PBXBuildFile; fileRef = 720767CE1E2DC37400F9A850 /* TerminationListener.m */; };
@@ -731,6 +733,8 @@
 		61F614540E24A12D009F47E7 /* it */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Sparkle.strings; sourceTree = "<group>"; };
 		61F83F6F0DBFE137006FDD30 /* SUBasicUpdateDriver.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUBasicUpdateDriver.h; sourceTree = "<group>"; };
 		61F83F700DBFE137006FDD30 /* SUBasicUpdateDriver.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUBasicUpdateDriver.m; sourceTree = "<group>"; };
+		651690A91EDDBDA10069AF40 /* DevolutionsHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DevolutionsHelper.h; sourceTree = "<group>"; };
+		651690AA1EDDBDA10069AF40 /* DevolutionsHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DevolutionsHelper.m; sourceTree = "<group>"; };
 		7205C42E1E11A6DA00E370AE /* SUInstallerProtocol.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUInstallerProtocol.h; sourceTree = "<group>"; };
 		7205C42F1E1215AD00E370AE /* SUUpdatePermissionResponse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SUUpdatePermissionResponse.h; sourceTree = "<group>"; };
 		7205C4301E1215AD00E370AE /* SUUpdatePermissionResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SUUpdatePermissionResponse.m; sourceTree = "<group>"; };
@@ -1047,6 +1051,7 @@
 		1495006D195FBBBD00BC5B5B /* Sparkle */ = {
 			isa = PBXGroup;
 			children = (
+				651690A81EDDBD8A0069AF40 /* Devolutions */,
 				720767D01E2E3DD300F9A850 /* AppKitPrevention.h */,
 				61299B3909CB055000B7442F /* Appcast Support */,
 				55C14BD5136EEFD000649790 /* Autoupdate */,
@@ -1309,6 +1314,15 @@
 			name = "Update Control";
 			sourceTree = "<group>";
 		};
+		651690A81EDDBD8A0069AF40 /* Devolutions */ = {
+			isa = PBXGroup;
+			children = (
+				651690A91EDDBDA10069AF40 /* DevolutionsHelper.h */,
+				651690AA1EDDBDA10069AF40 /* DevolutionsHelper.m */,
+			);
+			name = Devolutions;
+			sourceTree = "<group>";
+		};
 		722954B51D04ADAF00ECF9CA /* fileop */ = {
 			isa = PBXGroup;
 			children = (
@@ -1400,6 +1414,7 @@
 				767B61AC1972D488004E0C3C /* SUGuidedPackageInstaller.h in Headers */,
 				61EF67590E25C5B400F754E0 /* SUHost.h in Headers */,
 				618FA5010DAE88B40026945C /* SUInstaller.h in Headers */,
+				651690AB1EDDBDA10069AF40 /* DevolutionsHelper.h in Headers */,
 				72316BD61E0DBF730039EFD9 /* SULocalizations.h in Headers */,
 				55C14F06136EF6DB00649790 /* SULog.h in Headers */,
 				726F2CE51BC9C33D001971A4 /* SUOperatingSystem.h in Headers */,
@@ -1998,6 +2013,7 @@
 			files = (
 				723B252D1CEAB3A600909873 /* bscommon.c in Sources */,
 				5D06E8EB0FD68CE4005AE3F6 /* bspatch.c in Sources */,
+				651690AC1EDDBDA10069AF40 /* DevolutionsHelper.m in Sources */,
 				61B5FBB709C4FAFF00B25A18 /* SUAppcast.m in Sources */,
 				61B5FC6F09C51F4900B25A18 /* SUAppcastItem.m in Sources */,
 				72316BDF1E0E17910039EFD9 /* SUApplicationInfo.m in Sources */,
